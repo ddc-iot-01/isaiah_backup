@@ -1,0 +1,156 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "enter program name, for example ${workspaceFolder}/a.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/path/to/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+    {
+        "type": "extensionHost",
+        "request": "launch",
+        "name": "Launch Extension",
+        "runtimeExecutable": "${execPath}",
+        "args": [
+            "--extensionDevelopmentPath=${workspaceFolder}"
+        ],
+        "outFiles": [
+            "${workspaceFolder}/out/**/*.js"
+        ],
+        "preLaunchTask": "npm"
+    },
+        {
+            "name": "(gdb) Attach",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "enter program name, for example ${workspaceFolder}/a.exe",
+            "processId": "${command:pickProcess}",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/path/to/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Launch IoT Edge Module (.NET Core)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/Debug/<target-framework>/<project-name.dll>",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "internalConsoleOptions": "openOnSessionStart",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
+                "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "request": "attach",
+            "name": "Particle Debugger (photon, p1, electron)",
+            "servertype": "openocd",
+            "interface": "swd",
+            "device": "STM32F205RG",
+            "cwd": "${workspaceRoot}",
+            "executable": "${command:particle.getDebuggerExecutable}",
+            "preLaunchTask": "Particle: Flash application for debug (local)",
+            "armToolchainPath": "${command:particle.getDebuggerCompilerDir}",
+            "svdFile": "${command:particle.getDebuggerSVDFile}",
+            "searchDir": [
+                "${command:particle.getDebuggerSearchDir}"
+            ],
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/stm32f2x.cfg"
+            ],
+            "postAttachCommands": [
+                "monitor reset halt"
+            ],
+            "windows": {
+                "configFiles": [
+                    "interface\\cmsis-dap.cfg",
+                    "target\\stm32f2x.cfg"
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "request": "attach",
+            "name": "Particle Debugger (argon, boron / bsom / b5som, xenon)",
+            "servertype": "openocd",
+            "interface": "swd",
+            "device": "nRF52840_xxAA",
+            "cwd": "${workspaceRoot}",
+            "executable": "${command:particle.getDebuggerExecutable}",
+            "preLaunchTask": "Particle: Flash application for debug (local)",
+            "armToolchainPath": "${command:particle.getDebuggerCompilerDir}",
+            "svdFile": "${command:particle.getDebuggerSVDFile}",
+            "searchDir": [
+                "${command:particle.getDebuggerSearchDir}"
+            ],
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/nrf52-particle.cfg"
+            ],
+            "postAttachCommands": [
+                "monitor reset halt"
+            ],
+            "windows": {
+                "configFiles": [
+                    "interface\\cmsis-dap.cfg",
+                    "target\\nrf52-particle.cfg"
+                ]
+            }
+        },
+        {
+            "type": "cortex-debug",
+            "request": "attach",
+            "name": "Particle Programmer Shield v1.0 (photon, p1, electron)",
+            "servertype": "openocd",
+            "interface": "swd",
+            "device": "STM32F205RG",
+            "cwd": "${workspaceRoot}",
+            "executable": "${command:particle.getDebuggerExecutable}",
+            "preLaunchTask": "Particle: Flash application for debug (local)",
+            "armToolchainPath": "${command:particle.getDebuggerCompilerDir}",
+            "svdFile": "${command:particle.getDebuggerSVDFile}",
+            "searchDir": [
+                "${command:particle.getDebuggerSearchDir}"
+            ],
+            "configFiles": [
+                "interface/particle-ftdi.cfg",
+                "target/stm32f2x.cfg"
+            ],
+            "postAttachCommands": [
+                "monitor reset halt"
+            ],
+            "windows": {
+                "configFiles": [
+                    "interface\\particle-ftdi.cfg",
+                    "target\\stm32f2x.cfg"
+                ]
+            }
+        }
+    ]
+}
